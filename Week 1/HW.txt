@@ -1,0 +1,119 @@
+//====================================================================================================================================
+// Valerie Montalvo Week 1 Homework
+//====================================================================================================================================
+
+#include <iostream> 
+#include <string> 
+#include <iomanip> 
+#include <algorithm>
+
+// Function to enter SSN
+long getSocial();
+
+// Function to enter address
+string getAddress();
+
+// Function to enter name
+string getName();
+
+// Function to display record
+void display(long, string, string);
+
+using namespace std;
+
+
+// Initialize main program
+int main()
+{
+	// Variables
+	string name = "";
+	string address = "";
+	long ssn = 0;
+	char again = 'Y';
+
+	// Program repeats until user exits
+	while (again == 'Y' || again == 'y')
+	{
+		system("CLS");
+		cout << "\t\t\t Demographic Entry" << endl;
+		cout << endl << "\t Please enter:";
+		name = getName();
+		address = getAddress();
+		ssn = getSocial();
+
+		display(ssn, name, address);
+
+		cout << endl << "\t Enter another person? (Y/N): ";
+		cin >> again;
+	}
+
+	system("pause");
+	return 0;
+
+}
+
+// Function to enter name
+string getName()
+{
+	string name = "";
+
+	do
+	{
+		cout << endl << "/t/t Name: ";
+		getline(cin, name);
+
+		if (name.size() == 0 || name.size() > 20)
+		{
+			cout << endl << "/t/t Name is required, and cannot be longer than 20 characters.";
+		}
+	} while (name.size() == 0 || name.size() > 20);
+
+	return name;
+}
+
+// Function to enter the address
+string getAddress()
+{
+	string address = "";
+
+	do
+	{
+		cout << endl << "/t/t Address: ";
+		getline(cin, address);
+
+		if (address.size() == 0 || address.size() > 25)
+		{
+			cout << endl << "/t/t Address is required, and cannot be longer than 25 characters.";
+		}
+	} while (address.size() == 0 || address.size() > 25);
+
+	return address;
+}
+
+//Function to enter ssn
+long getSocial()
+{
+	long ssn = 0;
+
+	do
+	{
+		cout << endl << "/t/t SSN: ";
+		cin >> ssn;
+
+		if (ssn < 100000000 || ssn > 999999999)
+		{
+			cout << endl << "/t/t SSN must be between 100000000 and 999999999.";
+		}
+	} while (ssn < 100000000 || ssn > 999999999);
+
+	return ssn;
+}
+
+//Function to display record
+void display(long ssn, string name, string address)
+{
+
+	cout << endl << endl;
+	cout << "\t Name: " << name << " Address: " << address << " SSN: " << ssn << endl;
+
+}

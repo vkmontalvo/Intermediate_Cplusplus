@@ -1,0 +1,167 @@
+//Week 2 inclass Calculating Average Grade- CU 10/4
+//Week 3 inlcass format output, validated name, Switch name
+//Week 4 inlcass assign letter grades, format titles,
+//Week 6 inclass adding looping
+//Week 8 adding value returning functions
+//Week 9 adding void and passing by reference functions
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <algorithm>
+
+
+using namespace std;
+// function prototypes
+int Stud_ID();
+float calc_avg(int);
+void getname(string&);
+void displaygrade(string, float, char);
+
+int main()
+{
+// declare variables
+string name = "";
+int student_Id = 0;
+float average = 0.0;
+int opselect = 0;
+char ltrGrade = ' ';
+int numb_grades = 0;
+int ng=0;
+
+do
+{
+system("cls");
+//menu
+cout << "\n\tStudent Grade System:\n\n ";
+cout << "Select code:\n ";
+cout << "\n 1 Entering Grades";
+cout << "\n 2 Exit\n";
+cin >> opselect;
+
+
+switch (opselect)
+{
+case 1:
+
+//enter info
+cout << "Determine a student grade:\n\n";
+student_Id = Stud_ID();
+
+cin.ignore(1);//ignore /n in buffer//
+
+//get name
+getname(name);
+
+//loop to enter grades
+cout << "\nEnter the number of grades: ";
+cin >> ng;
+average= calc_avg(ng);
+
+//assign letter grade
+if (average >= 90 && average <= 100)
+{ltrGrade = 'A';}
+
+else if (average >= 80 && average <= 89)
+{ltrGrade = 'B';}
+
+else if (average >= 70 && average <= 79)
+{ltrGrade = 'C';}
+
+else if (average >= 60 && average <= 69)
+{ltrGrade = 'D';}
+
+else { ltrGrade = 'f'; }
+
+
+
+system("cls");
+
+//display report
+displaygrade(name, average, ltrGrade);
+
+
+
+break;
+
+case 2:
+system("cls");
+cout << "System Exit\n ";
+return 0;
+break;
+
+
+default:
+cout << "Invalid Selection";
+} // end of switch
+} while (1);
+
+system("pause");
+return 0;
+
+}
+int Stud_ID()
+{
+int student_Id = 0;
+cout << "\tEnter Student Id:======> ";
+cin >> student_Id;
+return student_Id;
+}
+
+float calc_avg(int ng)
+{
+float avg = 0.0;
+float grade1 = 0.0;
+float ttlgrade = 0.0;
+
+for (int x = 1; x <= ng; x++)
+{
+do{
+cout << "\tEnter Grade (between 0 and 100) " << x << ":=========> ";
+cin >> grade1;
+
+} while (grade1<0 || grade1>100);
+
+ttlgrade = ttlgrade + grade1;
+
+}
+
+//calculate average
+avg = ttlgrade / ng;
+
+
+return avg;
+}
+
+void getname(string&name)
+{
+//priming read
+cout << "\tEnter Student Name:====> ";
+getline(cin, name, '\n');
+
+
+while (name.size() == 0)//termination check//
+{
+cout << "No name entered";
+cout << "\tEnter Student Name:====> ";
+getline(cin, name, '\n');//looping read//
+}
+//algorith is need for transform
+transform(name.begin(), name.end(), name.begin(), tolower);
+
+}
+
+void displaygrade(string name, float average, char ltrGrade)
+{
+//titles
+cout << "\n\n\t\t\tGRADES\n";
+cout << left << setw(15) << setfill(' ') << "Name" << " " <<
+setw(7) << "Numeric" << " " <<
+setw(6) << "Letter" << endl;
+//data
+cout << left << setw(15) << setfill(' ') << name << " " <<
+setw(7) << fixed << setprecision(2) << average << " " <<
+setw(6) << ltrGrade << endl;
+
+system("pause");
+}
